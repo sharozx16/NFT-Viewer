@@ -9,16 +9,11 @@ function App() {
   const [state, setState] = useState(true);
   const [token, setToken] = useState([]);
  const[account,setAccount] = useState()
-  const connectContract = async () => {
-    const provider = new ethers.providers.Web3Provider(window.ethereum)
-    window.ethereum.enable()
-   const  signer = provider.getSigner()
 
-    console.log('signer', signer);
-    
-  //   const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-  // setAccount(accounts[0])
-  // console.log('account:',accounts[0])
+  const connectContract = async (signer) => {
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    setAccount(accounts[0])
+    console.log("accounts:",accounts[0])
     const address = "0xC2984F58901a1cECAde22d8be4aA07e2Ee67f28d";
     const contract = new ethers.Contract(address, contractABI, signer);
     getMetaData(contract);
@@ -42,7 +37,11 @@ function App() {
   };
 
   useEffect(() => {
-    connectContract();
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
+
+    const signer = provider.getSigner()   
+    console.log("Signer : ",signer)
+    connectContract(signer);
   }, []);
 
   return (
