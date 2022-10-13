@@ -21,7 +21,7 @@ function App() {
     getMetaData(contract);
   };
   const getMetaData = async (contract) => {
-    for (let i = 1; i < 3; i++) {
+    for (let i = 1; i <= 3; i++) {
       const tokensURI = await contract.tokenURI(i);
       const getMetadata = await fetch(tokensURI);
       const metadata = await getMetadata.json();
