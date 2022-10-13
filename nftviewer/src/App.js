@@ -10,9 +10,9 @@ function App() {
   const [token, setToken] = useState([]);
  const[account,setAccount] = useState()
   const connectContract = async () => {
-    provider = new ethers.providers.Web3Provider(window.ethereum)
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
     window.ethereum.enable()
-    signer = provider.getSigner()
+   const  signer = provider.getSigner()
 
     console.log('signer', signer);
     
