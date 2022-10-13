@@ -8,12 +8,15 @@ import { useState, useEffect } from "react";
 function App() {
   const [state, setState] = useState(true);
   const [token, setToken] = useState([]);
-
+ const[account,setAccount] = useState()
   const connectContract = async () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
+    await provider.send('eth_requestAccounts', []); // <- this promps user to connect metamask
     const signer = provider.getSigner();
-   
-
+    
+  //   const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+  // setAccount(accounts[0])
+  // console.log('account:',accounts[0])
     const address = "0xC2984F58901a1cECAde22d8be4aA07e2Ee67f28d";
     const contract = new ethers.Contract(address, contractABI, signer);
     getMetaData(contract);
