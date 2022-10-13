@@ -10,9 +10,11 @@ function App() {
   const [token, setToken] = useState([]);
  const[account,setAccount] = useState()
   const connectContract = async () => {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    await provider.send('eth_requestAccounts', []); // <- this promps user to connect metamask
-    const signer = provider.getSigner("0x68a859BF19043eea63B95Af6226b1F25aB2548CC");
+    provider = new ethers.providers.Web3Provider(window.ethereum)
+    window.ethereum.enable()
+    signer = provider.getSigner()
+
+    console.log('signer', signer);
     
   //   const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
   // setAccount(accounts[0])
